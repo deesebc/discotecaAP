@@ -7,12 +7,12 @@
 		<put-attribute name="title" value="Discoteca" />
 		<put-attribute name="header" value="/layout/header.jsp" />
 		<put-attribute name="menu" value="/layout/menu.jsp" />
-		<put-attribute name="body" value="" />
+		<put-attribute name="content" value="" />
 	</definition>
 
-	<definition name="contact" extends="base.definition">
-		<put-attribute name="title" value="Contact Manager" />
-		<put-attribute name="body" value="/pages/contact.jsp" />
+	<definition name="hello.page" extends="base.definition">
+		<put-attribute name="title" value="Hello Example" />
+		<put-attribute name="content" value="/jsp/hello.jsp" />
 	</definition>
 
 </tiles-definitions>
