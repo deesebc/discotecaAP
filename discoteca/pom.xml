@@ -43,9 +43,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>es.home</groupId>
-			<artifactId>recetaBD</artifactId>
-			<version>1.0</version>
+			<groupId>es.discoteca.accesoDatos</groupId>
+			<artifactId>discotecaBD</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- Spring 3 dependencies -->
 		<dependency>
@@ -84,6 +84,12 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
+		</dependency>
+		<!-- JSON -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.9</version>
 		</dependency>
 		<!-- BBDD -->
 		<dependency>

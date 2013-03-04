@@ -14,5 +14,12 @@
 		<put-attribute name="title" value="Hello Example" />
 		<put-attribute name="content" value="/jsp/hello.jsp" />
 	</definition>
+	
+	<definition name="search.disc.page" extends="base.definition">
+		<put-attribute name="title" value="Búsqueda" />
+		<put-attribute name="content" value="/jsp/buscarDisco.jsp" />
+	</definition>
+	
+	
 
 </tiles-definitions>

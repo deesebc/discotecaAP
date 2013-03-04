@@ -2,65 +2,14 @@
 
 @import url("reset.css");
 @import url("menu.css");
+@import url("layout.css");
 
-/** LAYOUT */
-body {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    color:#333
-}
+@import url("demo_table.css");
+@import url("jquery.dataTables.css");
 
-p {
-    padding: 10px;
+fieldset{
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px;
 }
-
-#wrapper {
-    margin: 0 auto;
-    width: 1000px;
-}
-
-#headerwrap {
-    width: 1000px;
-    float: left;
-    margin: 0 auto;
-}
-
-#header {
-    height: 75px;
-    background: #0C5DA5;
-    border-radius: 10px;
-    border: 1px solid #0C5DA5;
-    margin: 5px;
-    color: white;
-}
-
-#contentwrap {
-    width: 850px;
-    float: left;
-    margin: 0 auto;
-}
-
-#content {
-    background: #FFFFFF;
-    border-radius: 10px;
-    border: 1px solid #FF4F00;
-    margin: 5px;
-    
-    -webkit-box-shadow: 10px 15px 40px 10px rgba(0,0,0,1);
-	-moz-box-shadow: 10px 15px 40px 10px rgba(0,0,0,1);
-	box-shadow: 10px 15px 40px 10px rgba(0,0,0,1);
-}
-
-#leftcolumnwrap {
-    width: 150px;
-    float: left;
-    margin: 0 auto;
-}
-
-#leftcolumn {
-    background: #FF9500;
-    border-radius: 10px;
-    border: 1px solid #FF9500;
-    margin: 5px;
-}
-/** F - LAYOUT */
