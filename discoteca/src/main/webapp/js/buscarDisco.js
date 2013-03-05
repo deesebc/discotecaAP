@@ -1,3 +1,15 @@
+/*$(document).ready(function() {
+	$('#sdTable').dataTable({
+	    "sAjaxSource" : contexPath + "/jsonSearchDisc.htm",
+	    "sAjaxDataProp" : 'results',
+	    "aoColumns" : [ {
+	        mDataProp : 'nombre'
+	    }, {
+	        mDataProp : 'grupo'
+	    } ]
+	} );
+} );
+*/
  $(document).ready(function() {
         var stringify_aoData = function (aoData) {
             var o = {};
@@ -26,7 +38,7 @@
             });
             return JSON.stringify(o);
         };
-//JSON.stringify(aoData),
+
         $('#sdTable').dataTable( {
             "bProcessing": true,
             "bServerSide": true,
@@ -38,6 +50,7 @@
                     type: "POST",
                     url: sSource,
                     data: stringify_aoData(aoData),
+//                    data: JSON.stringify(aoData),
                     success: fnCallback,
                     error : function (e) {
                         alert ('1 '+e);

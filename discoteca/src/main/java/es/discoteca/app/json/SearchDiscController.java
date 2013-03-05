@@ -4,6 +4,7 @@
 package es.discoteca.app.json;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.discoteca.app.json.bean.DataTablesRequest;
 import es.discoteca.app.json.bean.DataTablesResponse;
+import es.discoteca.app.json.bean.DiscoJson;
 import es.discoteca.bbdd.bean.Disco;
 import es.discoteca.bbdd.service.DiscoService;
 
@@ -35,15 +37,24 @@ public class SearchDiscController implements Serializable {
 	@Autowired
 	private DiscoService service;
 
-	@RequestMapping(value = "/jsonSearchDisc.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/jsonSearchDisc.htm", method = { RequestMethod.POST, RequestMethod.GET })
 	public @ResponseBody
-	DataTablesResponse<Object> getData(@RequestBody final DataTablesRequest dtReq,
+	DataTablesResponse<DiscoJson> getData(@RequestBody final DataTablesRequest dtReq,
 			final HttpServletResponse response) {
 
 		List<Disco> list = service.findAll();
+		List<DiscoJson> list2 = new ArrayList<DiscoJson>();
 		for (Disco disco : list) {
-			LOGGER.info("Disco name: " + disco.getNombre());
+			DiscoJson bean = new DiscoJson();
+			bean.setNombre(disco.getNombre());
+			bean.setGrupo(disco.getGrupo());
+			list2.add(bean);
 		}
-		return new DataTablesResponse<Object>();
+		DataTablesResponse<DiscoJson> exit = new DataTablesResponse<DiscoJson>();
+		exit.data = list2;
+		exit.totalRecords = list2.size();
+		exit.totalDisplayRecords = list2.size();
+		exit.echo = dtReq.echo;
+		return exit;
 	}
 }

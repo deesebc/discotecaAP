@@ -26,9 +26,6 @@ public class DataTablesResponse<T> implements Serializable {
 	@JsonProperty(value = "sEcho")
 	public String echo;
 
-	@JsonProperty(value = "sColumns")
-	public String columns;
-
 	@JsonProperty(value = "aaData")
 	public List<T> data = new ArrayList<T>();
 
