@@ -33,7 +33,7 @@ public class DataTablesRequest implements Serializable {
 
 	// has to be revisited for Object type dataProps.
 	@JsonProperty(value = "amDataProp")
-	public List<Integer> dataProp;
+	public List<String> dataProp;
 
 	@JsonProperty(value = "sSearch")
 	public String searchQuery;

@@ -18,9 +18,9 @@ public class DiscoJson implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty(value = "0")
+	@JsonProperty(value = "nombre")
 	private String nombre;
-	@JsonProperty(value = "1")
+	@JsonProperty(value = "grupo")
 	private String grupo;
 
 	public String getGrupo() {

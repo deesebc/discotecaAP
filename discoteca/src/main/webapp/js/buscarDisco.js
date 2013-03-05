@@ -43,6 +43,10 @@
             "bProcessing": true,
             "bServerSide": true,
             "sAjaxSource": contexPath + "/jsonSearchDisc.htm",
+            "aoColumns":[
+                 {"sWidth": '50%', "mDataProp": "nombre"},
+                 {"sWidth": '50%', "mDataProp": "grupo"}
+             ],
             "fnServerData": function ( sSource, aoData, fnCallback ) {
                 $.ajax( {
                     dataType: "json",
@@ -50,7 +54,6 @@
                     type: "POST",
                     url: sSource,
                     data: stringify_aoData(aoData),
-//                    data: JSON.stringify(aoData),
                     success: fnCallback,
                     error : function (e) {
                         alert ('1 '+e);
@@ -59,3 +62,6 @@
             }
         } );
     } );
+ 
+ 
+
