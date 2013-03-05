@@ -9,12 +9,19 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * @author xe29197
+ * { "sEcho":1, "iColumns":7, "sColumns":"", "iDisplayStart":0,
+ * "iDisplayLength":10, "amDataProp":["name1","name2","name3","name4","name5"],
+ * "sSearch":"", "bRegex":false, "asSearch":["","","","","","",""],
+ * "abRegex":[false,false,false,false,false,false,false],
+ * "abSearchable":[true,true,true,true,true,true,true], "iSortingCols":1,
+ * "aiSortCol":[0], "asSortDir":["asc"],
+ * "abSortable":[true,true,true,true,true,true,true] }
  * 
+ * @author inder
  */
 public class DataTablesRequest implements Serializable {
 
-	private static final long serialVersionUID = -2104355708988235320L;
+	private static final long serialVersionUID = 2302257663407115446L;
 
 	@JsonProperty(value = "sEcho")
 	public String echo;
@@ -64,4 +71,16 @@ public class DataTablesRequest implements Serializable {
 
 	public DataTablesRequest() {
 	}
+
+	@Override
+	public String toString() {
+		return "DataTablesRequest [echo=" + echo + ", numColumns=" + numColumns + ", columns="
+				+ columns + ", displayStart=" + displayStart + ", displayLength=" + displayLength
+				+ ", dataProp=" + dataProp + ", searchQuery=" + searchQuery + ", columnSearches="
+				+ columnSearches + ", hasRegex=" + hasRegex + ", regexColumns=" + regexColumns
+				+ ", searchColumns=" + searchColumns + ", sortingCols=" + sortingCols
+				+ ", sortedColumns=" + sortedColumns + ", sortDirections=" + sortDirections
+				+ ", sortableColumns=" + sortableColumns + "]";
+	}
+
 }
