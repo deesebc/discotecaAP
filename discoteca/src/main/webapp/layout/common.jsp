@@ -3,7 +3,6 @@
 <html>
 <head>
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
-<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" />
 </head>
 <body>

@@ -4,9 +4,6 @@
 @import url("menu.css");
 @import url("layout.css");
 
-@import url("demo_table.css");
-@import url("jquery.dataTables.css");
-
 fieldset{
 	border: 1px solid black;
 	border-radius: 10px;
