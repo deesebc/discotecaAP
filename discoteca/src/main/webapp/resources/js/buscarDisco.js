@@ -1,16 +1,4 @@
-/*$(document).ready(function() {
-	$('#sdTable').dataTable({
-	    "sAjaxSource" : contexPath + "/jsonSearchDisc.htm",
-	    "sAjaxDataProp" : 'results',
-	    "aoColumns" : [ {
-	        mDataProp : 'nombre'
-	    }, {
-	        mDataProp : 'grupo'
-	    } ]
-	} );
-} );
-*/
- $(document).ready(function() {
+$(document).ready(function() {
         var stringify_aoData = function (aoData) {
             var o = {};
             var modifiers = ['mDataProp_', 'sSearch_', 'iSortCol_', 'bSortable_', 'bRegex_', 'bSearchable_', 'sSortDir_'];
@@ -63,5 +51,5 @@
         } );
     } );
  
- 
+
 

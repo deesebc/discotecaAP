@@ -17,7 +17,17 @@
 	
 	<definition name="search.disc.page" extends="base.definition">
 		<put-attribute name="title" value="Búsqueda" />
+		<put-attribute name="content" value="/jsp/searchDisc.jsp" />
+	</definition>
+	
+	<definition name="buscar.disco.page" extends="base.definition">
+		<put-attribute name="title" value="Búsqueda" />
 		<put-attribute name="content" value="/jsp/buscarDisco.jsp" />
+	</definition>
+	
+	<definition name="search.interprent.page" extends="base.definition">
+		<put-attribute name="title" value="Búsqueda Int" />
+		<put-attribute name="content" value="/jsp/searchInterprent.jsp" />
 	</definition>
 	
 	
