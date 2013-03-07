@@ -2,7 +2,7 @@ $(function() {
 		$("#grid").jqGrid({
 		   	url:contexPath + "/jsonSearchDisc.htm",
 			datatype: 'json',
-			mtype: 'GET',
+			mtype: 'POST',
 		   	colNames:['Nombre', 'Grupo'],
 		   	colModel:[
 		   		{name:'nombre',index:'nombre', width:100, editable:true, editrules:{required:true}, editoptions:{size:10}},
@@ -22,6 +22,10 @@ $(function() {
 		    emptyrecords: "Empty discs",
 		    loadonce: false,
 		    loadComplete: function() {},
+		    serializeGridData: function(postData) {
+			    return JSON.stringify(postData);
+			},
+			ajaxGridOptions: { contentType: "application/json" }, //permite enviar json
 		    jsonReader : {
 		        root: "rows",
 		        page: "page",
@@ -32,7 +36,7 @@ $(function() {
 		        id: "id"
 		    }
 		});
- 
+		
 		$("#grid").jqGrid('navGrid','#pager',
 				{edit:false, add:false, del:false, search:true},
 				{}, {}, {}, 
@@ -43,7 +47,7 @@ $(function() {
 					closeAfterSearch: true
 				}
 		);
-		
+		/*
 		$("#grid").navButtonAdd('#pager',
 				{ 	caption:"Add", 
 					buttonicon:"ui-icon-plus", 
@@ -73,7 +77,7 @@ $(function() {
 				cursor: "pointer"
 			} 
 		);
- 
+ 	*/
 		// Toolbar Search
 		$("#grid").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true, defaultSearch:"cn"});
 	});

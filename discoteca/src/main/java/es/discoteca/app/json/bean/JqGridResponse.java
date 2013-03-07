@@ -5,6 +5,8 @@ package es.discoteca.app.json.bean;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
  * @author xe29197
  * 
@@ -13,21 +15,25 @@ public class JqGridResponse<T> {
 	/**
 	 * Current page of the query
 	 */
+	@JsonProperty(value = "page")
 	private String page;
 
 	/**
 	 * Total pages for the query
 	 */
+	@JsonProperty(value = "total")
 	private String total;
 
 	/**
 	 * Total number of records for the query
 	 */
+	@JsonProperty(value = "records")
 	private String records;
 
 	/**
 	 * An array that contains the actual objects
 	 */
+	@JsonProperty(value = "rows")
 	private List<T> rows;
 
 	public String getPage() {

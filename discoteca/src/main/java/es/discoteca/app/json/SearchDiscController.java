@@ -7,14 +7,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.discoteca.app.json.bean.DiscoJson;
+import es.discoteca.app.json.bean.JqGridRequest;
 import es.discoteca.app.json.bean.JqGridResponse;
 import es.discoteca.bbdd.bean.Disco;
 import es.discoteca.bbdd.service.DiscoService;
@@ -35,12 +39,8 @@ public class SearchDiscController implements Serializable {
 
 	@RequestMapping(value = "/jsonSearchDisc.htm", produces = "application/json")
 	public @ResponseBody
-	JqGridResponse<DiscoJson> records(@RequestParam("_search") final Boolean search,
-			@RequestParam(value = "filters", required = false) final String filters,
-			@RequestParam(value = "page", required = false) final Integer page,
-			@RequestParam(value = "rows", required = false) final Integer rows,
-			@RequestParam(value = "sidx", required = false) final String sidx,
-			@RequestParam(value = "sord", required = false) final String sord) {
+	JqGridResponse<DiscoJson> records(@RequestBody final JqGridRequest jqGridRequest,
+			final HttpServletRequest request, final HttpServletResponse response) {
 
 		List<Disco> list = service.findAll();
 		List<DiscoJson> list2 = new ArrayList<DiscoJson>();
