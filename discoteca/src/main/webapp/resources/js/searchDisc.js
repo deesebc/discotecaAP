@@ -47,7 +47,7 @@ $(function() {
 					closeAfterSearch: true
 				}
 		);
-		/*
+		
 		$("#grid").navButtonAdd('#pager',
 				{ 	caption:"Add", 
 					buttonicon:"ui-icon-plus", 
@@ -77,7 +77,26 @@ $(function() {
 				cursor: "pointer"
 			} 
 		);
- 	*/
+ 	
 		// Toolbar Search
 		$("#grid").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true, defaultSearch:"cn"});
 	});
+
+function addRow(){}
+function deleteRow(){}
+function editRow() {
+    // Redireccionar a la pagina de Edicion de Registro, con el ultimo seleccionado
+    var row = jQuery("#grid").jqGrid('getGridParam','selrow');
+    
+    if( row != null ) {
+        window.location.href = contexPath + '/edit/disc.htm?id=' + row;
+    } else { 
+        jQuery( "#dialogSelectRow" ).dialog({
+                buttons: { OK: function() {
+                                    jQuery( this ).dialog( "close" );
+                                }
+                            }
+            }
+        );
+    }
+}
