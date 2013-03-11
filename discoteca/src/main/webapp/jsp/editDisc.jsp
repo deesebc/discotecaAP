@@ -1,22 +1,16 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
-<link rel="stylesheet" type="text/css" media="screen" href='${pageContext.request.contextPath}/resources/css/jquery-ui/pepper-grinder/jquery-ui-1.8.16.custom.css'/>
-<link rel="stylesheet" type="text/css" media="screen" href='${pageContext.request.contextPath}/resources/css/jqgrid/ui.jqgrid-4.3.1.css'/>
-<link rel="stylesheet" type="text/css" media="screen" href='${pageContext.request.contextPath}/resources/css/style.css'/>
-
-<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jquery/jquery-1.6.4.min.js"></script>
-<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
-<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jqgrid/grid.locale-en-4.3.1.js"></script>
-<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jqgrid/jquery.jqGrid.min.4.3.1.js"></script>
-<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/searchDisc.js"></script>
-
-<script type="text/javascript">
-    var contexPath = "<%=request.getContextPath() %>";
-</script>
-
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:url var="saveDiscUrl" value="/save/disc.htm"/>
+<form:form method="post" action="/discoteca/save/disc.htm" commandName="disco" modelAttribute="disco">
 <p>
 	<fieldset>
 		<legend><spring:message code="general.edit"/></legend>
-		
+		<div>
+			<form:label path="nombre"><spring:message code="general.name"/></form:label>&nbsp;<form:input path="nombre" />&nbsp;&nbsp;
+			<form:label path="grupo"><spring:message code="general.group.name"/></form:label>&nbsp;<form:input path="grupo" />&nbsp;&nbsp;
+			<button id="acceptButton" type="submit" title="<spring:message code='general.button.accept'/>"><spring:message code="general.button.accept"/></button>
+		</div>
 	</fieldset>
 </p>
+<form:hidden path="ident" />
+</form:form>
