@@ -36,10 +36,7 @@ public class RedirectDiscController {
 			final HttpServletResponse response) throws ServletException, IOException {
 
 		logger.info("Pasamos por RedirectDiscController");
-
 		Disco disco = service.findById(Integer.valueOf(id));
-		// SaveDiscForm form = new SaveDiscForm(disco);
-
 		ModelAndView model = new ModelAndView("edit.disc.page");
 		model.addObject("disco", disco);
 

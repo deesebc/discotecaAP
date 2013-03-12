@@ -22,10 +22,13 @@
 			<button id="search" type="button" title="<spring:message code='general.search'/>"><spring:message code="general.search"/></button>
 		</div>
 	</fieldset>
-	<div id='jqgrid'>
-		<table id='grid'></table>
-		<div id='pager'></div>
-	</div>
-	
-	<div id='msgbox' title='' style='display:none'></div>
+	<br/><br/><br/>
+	<fieldset>
+		<legend><spring:message code="general.list.song"/></legend>
+		<div id='jqgrid'>
+			<table id='grid'></table>
+			<div id='pager'></div>
+		</div>
+		<div id='msgbox' title='' style='display:none'></div>
+	</fieldset>
 </p>

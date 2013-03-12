@@ -9,6 +9,8 @@
 
 <script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jquery/jquery-1.6.4.min.js"></script>
 <script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
+<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jqgrid/grid.locale-en-4.3.1.js"></script>
+<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jqgrid/jquery.jqGrid.min.4.3.1.js"></script>
 <script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/saveDisc.js"></script>
 <form:form method="post" action="/discoteca/save/disc.htm" modelAttribute="disco">
 <p>
@@ -20,6 +22,11 @@
 			<button id="acceptButton" type="submit" title="<spring:message code='general.button.accept'/>"><spring:message code="general.button.accept"/></button>
 		</div>
 	</fieldset>
+	<div id='jqgrid'>
+		<table id='grid'></table>
+		<div id='pager'></div>
+	</div>
+	<div id='msgbox' title='' style='display:none'></div>
 </p>
-<form:hidden path="ident" />
+<form:hidden path="ident" id="idDisc" />
 </form:form>

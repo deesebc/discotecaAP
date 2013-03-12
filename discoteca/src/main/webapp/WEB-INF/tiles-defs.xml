@@ -16,17 +16,17 @@
 	</definition>
 	
 	<definition name="search.disc.page" extends="base.definition">
-		<put-attribute name="title" value="Búsqueda" />
+		<put-attribute name="title" value="Busqueda" />
 		<put-attribute name="content" value="/jsp/searchDisc.jsp" />
 	</definition>
 	
 	<definition name="search.interprent.page" extends="base.definition">
-		<put-attribute name="title" value="Búsqueda Int" />
+		<put-attribute name="title" value="Busqueda Int" />
 		<put-attribute name="content" value="/jsp/searchInterprent.jsp" />
 	</definition>
 	
 	<definition name="edit.disc.page" extends="base.definition">
-		<put-attribute name="title" value="Edición" />
+		<put-attribute name="title" value="Edicion" />
 		<put-attribute name="content" value="/jsp/editDisc.jsp" />
 	</definition>
 
