@@ -3,8 +3,110 @@ $(function() {
 		source : contexPath + "/jsonAutoCompleteGroupName.htm",
 		minLength : 3
 	});
+	
+	$("#gridSingers").jqGrid({
+		url : contexPath + "/jsonSearchSinger.htm",
+		datatype : 'json',
+		mtype : 'POST',
+		colNames : [ 'Nombre', 'Instrumento', 'Ident' ],
+		colModel : [ {
+			name : 'nombre',
+			index : 'nombre',
+			width : 100,
+			editable : true,
+			editrules : {
+				required : true
+			},
+			editoptions : {
+				size : 10
+			}
+		}, {
+			name : 'instrumento',
+			index : 'instrumento',
+			width : 100,
+			editable : true,
+			editrules : {
+				required : true
+			},
+			editoptions : {
+				size : 10
+			}
+		}, {
+			name : 'ident',
+			index : 'ident',
+			width : 100,
+			editable : false,
+			editrules:{
+                required:true, 
+                edithidden:true
+            }, 
+            hidden:true,
+			editoptions : {
+				size : 10
+			}
+			
+		}, ],
+		postData : {},
+		rowNum : 3,
+		autowidth : true,
+		rownumbers : true,
+		pager : '#pagerSingers',
+		sortname : 'nombre',
+		viewrecords : true,
+		sortorder : "asc",
+		caption : "Singers",
+		emptyrecords : "Empty singers",
+		loadonce : false,
+		loadComplete : function() {
+		},
+		serializeGridData : function(postData) {
+			return JSON.stringify(postData);
+		},
+		ajaxGridOptions : {
+			contentType : "application/json"
+		}, // permite enviar json
+		jsonReader : {
+			root : "rows",
+			page : "page",
+			total : "total",
+			records : "records",
+			repeatitems : false,
+			cell : "cell",
+			id : "id"
+		}
+	});
+	
+	$("#gridSingers").jqGrid('navGrid', '#pagerSingers', {
+		edit : false,
+		add : false,
+		del : false,
+		search : false
+	}, {}, {}, {}, { // search
+		sopt : [ 'cn', 'eq', 'ne', 'lt', 'gt', 'bw', 'ew' ],
+		closeOnEscape : true,
+		multipleSearch : true,
+		closeAfterSearch : true
+	});
 
-	$("#grid").jqGrid({
+	$("#gridSingers").navButtonAdd('#pagerSingers', {
+		caption : "Add",
+		buttonicon : "ui-icon-plus",
+		onClickButton : addSinger,
+		position : "last",
+		title : "",
+		cursor : "pointer"
+	});
+
+	$("#gridSingers").navButtonAdd('#pagerSingers', {
+		caption : "Delete",
+		buttonicon : "ui-icon-trash",
+		onClickButton : addSinger,
+		position : "last",
+		title : "",
+		cursor : "pointer"
+	});
+
+	$("#gridSongs").jqGrid({
 		url : contexPath + "/jsonSearchSong.htm",
 		datatype : 'json',
 		mtype : 'POST',
@@ -64,7 +166,7 @@ $(function() {
 		height : 240,
 		autowidth : true,
 		rownumbers : true,
-		pager : '#pager',
+		pager : '#pagerSongs',
 		sortname : 'nombre',
 		viewrecords : true,
 		sortorder : "asc",
@@ -91,7 +193,7 @@ $(function() {
 		}
 	});
 
-	$("#grid").jqGrid('navGrid', '#pager', {
+	$("#gridSongs").jqGrid('navGrid', '#pagerSongs', {
 		edit : false,
 		add : false,
 		del : false,
@@ -103,33 +205,150 @@ $(function() {
 		closeAfterSearch : true
 	});
 
-	$("#grid").navButtonAdd('#pager', {
+	$("#gridSongs").navButtonAdd('#pagerSongs', {
 		caption : "Add",
 		buttonicon : "ui-icon-plus",
-		onClickButton : addRow,
+		onClickButton : addSong,
 		position : "last",
 		title : "",
 		cursor : "pointer"
 	});
 
-	$("#grid").navButtonAdd('#pager', {
+	$("#gridSongs").navButtonAdd('#pagerSongs', {
 		caption : "Delete",
 		buttonicon : "ui-icon-trash",
-		onClickButton : deleteRow,
+		onClickButton : deleteSong,
 		position : "last",
 		title : "",
 		cursor : "pointer"
 	});
 });
 
-function addRow() {
-	// $("#grid").jqGrid('setColProp', 'username', {editoptions:{readonly:false,
+function addSinger(){
+	$('#gridSingers').jqGrid('editGridRow', 'new', {
+		url : contexPath + "/jsonAddSinger.htm",
+		editData : {
+			idDisco : $('#idDisc').val()
+		},
+		serializeEditData : function(data) {
+			data.id = 0;
+			return $.param(data);
+		},
+		ajaxGridOptions : {
+			contentType : "application/json"
+		}, // permite enviar json
+		recreateForm : true,
+		beforeShowForm : function(form) {
+			$('#pData').hide();
+			$('#nData').hide();
+			// $('#password',form).addClass('ui-widget-content').addClass('ui-corner-all');
+		},
+		beforeInitData : function(form) {
+		},
+		closeAfterAdd : true,
+		reloadAfterSubmit : true,
+		afterSubmit : function(response, postdata) {
+			var result = eval('(' + response.responseText + ')');
+			var errors = "";
+
+			if (result.success == false) {
+				for ( var i = 0; i < result.message.length; i++) {
+					errors += result.message[i] + "<br/>";
+				}
+			} else {
+				$('#msgbox').text('Entry has been added successfully');
+				$('#msgbox').dialog({
+					title : 'Success',
+					modal : true,
+					buttons : {
+						"Ok" : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+			}
+			// only used for adding new records
+			var newId = null;
+
+			return [ result.success, errors, newId ];
+		}
+	});
+}
+
+function deleteSinger(){
+	var row = $('#gridSingers').jqGrid('getGridParam', 'selrow');
+
+	// A pop-up dialog will appear to confirm the selected action
+	if (row != null)
+		$('#gridSingers').jqGrid('delGridRow',	row,{
+					url : contexPath + "/jsonDeleteSinger.htm",
+					recreateForm : true,
+					beforeShowForm : function(form) {
+						// Change title
+						$(".delmsg").replaceWith('<span style="white-space: pre;">Delete selected record?</span>');
+						// hide arrows
+						$('#pData').hide();
+						$('#nData').hide();
+					},
+					reloadAfterSubmit : true,
+					closeAfterDelete : true,
+					serializeDelData : function(postdata) {
+						var rowdata = $('#gridSingers').getRowData(postdata.id);
+						// append postdata with any information
+						return {
+							id : rowdata.ident,
+							oper : postdata.oper,
+							idDisco : $('#idDisc').val()
+						};
+					},
+					afterSubmit : function(response, postdata) {
+						var result = eval('(' + response.responseText + ')');
+						var errors = "";
+
+						if (result.success == false) {
+							for ( var i = 0; i < result.message.length; i++) {
+								errors += result.message[i] + "<br/>";
+							}
+						} else {
+							$('#msgbox').text('Entry has been deleted successfully');
+							$('#msgbox').dialog({
+								title : 'Success',
+								modal : true,
+								buttons : {
+									"Ok" : function() {
+										$(this).dialog("close");
+									}
+								}
+							});
+						}
+						// only used for adding new records
+						var newId = null;
+
+						return [ result.success, errors, newId ];
+					}
+				});
+	else {
+		$('#msgbox').text('You must select a record first!');
+		$('#msgbox').dialog({
+			title : 'Error',
+			modal : true,
+			buttons : {
+				"Ok" : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	}
+}
+
+function addSong() {
+	// $("#gridSongs").jqGrid('setColProp', 'username', {editoptions:{readonly:false,
 	// size:10}});
-	// $("#grid").jqGrid('setColProp', 'password', {hidden: false});
-	// $("#grid").jqGrid('setColProp', 'password', {editrules:{required:true}});
+	// $("#gridSongs").jqGrid('setColProp', 'password', {hidden: false});
+	// $("#gridSongs").jqGrid('setColProp', 'password', {editrules:{required:true}});
 
 	// Get the currently selected row
-	$('#grid').jqGrid('editGridRow', 'new', {
+	$('#gridSongs').jqGrid('editGridRow', 'new', {
 		url : contexPath + "/jsonAddSong.htm",
 		editData : {
 			idDisco : $('#idDisc').val()
@@ -178,16 +397,16 @@ function addRow() {
 		}
 	});
 
-	// $("#grid").jqGrid('setColProp', 'password', {hidden: true});
+	// $("#gridSongs").jqGrid('setColProp', 'password', {hidden: true});
 } // end of addRow
 
-function deleteRow(obj, args) {
+function deleteSong(obj, args) {
 	// Get the currently selected row
-	var row = $('#grid').jqGrid('getGridParam', 'selrow');
+	var row = $('#gridSongs').jqGrid('getGridParam', 'selrow');
 
 	// A pop-up dialog will appear to confirm the selected action
 	if (row != null)
-		$('#grid').jqGrid('delGridRow',	row,{
+		$('#gridSongs').jqGrid('delGridRow',	row,{
 					url : contexPath + "/jsonDeleteSong.htm",
 					recreateForm : true,
 					beforeShowForm : function(form) {
@@ -200,7 +419,7 @@ function deleteRow(obj, args) {
 					reloadAfterSubmit : true,
 					closeAfterDelete : true,
 					serializeDelData : function(postdata) {
-						var rowdata = $('#grid').getRowData(postdata.id);
+						var rowdata = $('#gridSongs').getRowData(postdata.id);
 						// append postdata with any information
 						return {
 							id : rowdata.ident,

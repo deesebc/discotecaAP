@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.discoteca.app.json.bean.StatusResponse;
 import es.discoteca.bbdd.bean.Cancion;
 import es.discoteca.bbdd.bean.Disco;
+import es.discoteca.bbdd.bean.Interprete;
 import es.discoteca.bbdd.service.DiscoService;
 
 /**
@@ -33,6 +34,28 @@ public class SaveDiscController {
 
 	@Autowired
 	private DiscoService service;
+
+	@RequestMapping(value = "/jsonAddSinger.htm", produces = "application/json", method = RequestMethod.POST)
+	public @ResponseBody
+	StatusResponse addInterpretent(@RequestParam final String nombre,
+			@RequestParam final String instrumento, @RequestParam final String idDisco)
+			throws ServletException, IOException {
+		boolean success = true;
+		try {
+			Disco bean = service.findById(Integer.valueOf(idDisco));
+			Interprete interprete = new Interprete();
+			interprete.setInstrumento(instrumento);
+			interprete.setIdent(null);
+			interprete.setNombre(nombre);
+			bean.getInterpretes().add(interprete);
+			service.update(bean);
+		} catch (Exception except) {
+			success = false;
+			logger.error("Error al guardar el interprete", except);
+		}
+
+		return new StatusResponse(success);
+	}
 
 	@RequestMapping(value = "/jsonAddSong.htm", produces = "application/json", method = RequestMethod.POST)
 	public @ResponseBody
@@ -52,6 +75,32 @@ public class SaveDiscController {
 		} catch (Exception except) {
 			success = false;
 			logger.error("Error al guardar el disco", except);
+		}
+
+		return new StatusResponse(success);
+	}
+
+	@RequestMapping(value = "/jsonDeleteSinger.htm", produces = "application/json", method = RequestMethod.POST)
+	public @ResponseBody
+	StatusResponse deleteInterpretent(@RequestParam final String id,
+			@RequestParam final String idDisco) throws ServletException, IOException {
+		boolean success = true;
+		try {
+			Disco bean = service.findById(Integer.valueOf(idDisco));
+			Iterator<Interprete> iterator = bean.getInterpretes().iterator();
+			boolean enc = false;
+			while (iterator.hasNext() && !enc) {
+				if (iterator.next().getIdent().equals(Integer.valueOf(id))) {
+					iterator.remove();
+					enc = true;
+				}
+			}
+			service.update(bean);
+		} catch (Exception except) {
+			success = false;
+			logger.warn("Id interprete: " + id, except);
+			logger.warn("Id disco: " + idDisco, except);
+			logger.error("Error al borrar el interprete", except);
 		}
 
 		return new StatusResponse(success);

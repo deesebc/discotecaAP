@@ -23,8 +23,13 @@
 		</div>
 	</fieldset>
 	<div id='jqgrid'>
-		<table id='grid'></table>
-		<div id='pager'></div>
+		<table id='gridSingers'></table>
+		<div id='pagerSingers'></div>
+	</div>
+	<br/><br/>
+	<div id='jqgrid'>
+		<table id='gridSongs'></table>
+		<div id='pagerSongs'></div>
 	</div>
 	<div id='msgbox' title='' style='display:none'></div>
 </p>
