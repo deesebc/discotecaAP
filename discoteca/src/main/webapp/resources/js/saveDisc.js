@@ -5,7 +5,7 @@ $(function() {
 	});
 	
 	$("#gridSingers").jqGrid({
-		url : contexPath + "/jsonSearchSinger.htm",
+		url : contexPath + "/jsonSearchSinger.htm?id="+$('#idDisc').val(),
 		datatype : 'json',
 		mtype : 'POST',
 		colNames : [ 'Nombre', 'Instrumento', 'Ident' ],
@@ -100,14 +100,14 @@ $(function() {
 	$("#gridSingers").navButtonAdd('#pagerSingers', {
 		caption : "Delete",
 		buttonicon : "ui-icon-trash",
-		onClickButton : addSinger,
+		onClickButton : deleteSinger,
 		position : "last",
 		title : "",
 		cursor : "pointer"
 	});
 
 	$("#gridSongs").jqGrid({
-		url : contexPath + "/jsonSearchSong.htm",
+		url : contexPath + "/jsonSearchSong.htm?id="+$('#idDisc').val(),
 		datatype : 'json',
 		mtype : 'POST',
 		colNames : [ 'Nombre', 'Duraci&oacute;n', 'Posici&oacute;n', 'Ident' ],

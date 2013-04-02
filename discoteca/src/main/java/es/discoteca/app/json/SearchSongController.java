@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.discoteca.app.json.bean.CancionJson;
@@ -41,9 +42,9 @@ public class SearchSongController implements Serializable {
 	@RequestMapping(value = "/jsonSearchSong.htm", produces = "application/json")
 	public @ResponseBody
 	JqGridResponse<CancionJson> records(@RequestBody final JqGridRequest jqGridRequest,
-			final HttpServletRequest request, final HttpServletResponse response) {
+			@RequestParam final String id, final HttpServletRequest request,
+			final HttpServletResponse response) {
 
-		String id = "1";
 		Disco disco = service.findById(Integer.valueOf(id));
 		List<CancionJson> list2 = new ArrayList<CancionJson>();
 		for (Cancion cancion : disco.getCanciones()) {
