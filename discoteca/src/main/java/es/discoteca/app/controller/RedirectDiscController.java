@@ -41,6 +41,5 @@ public class RedirectDiscController {
 		model.addObject("disco", disco);
 
 		return model;
-
 	}
 }

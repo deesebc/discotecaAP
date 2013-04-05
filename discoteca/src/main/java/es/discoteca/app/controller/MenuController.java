@@ -32,13 +32,13 @@ public class MenuController {
 
 	}
 
-	@RequestMapping(value = "/search/interprent.htm")
+	@RequestMapping(value = "/search/book.htm")
 	public ModelAndView searchInterprent(final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException, IOException {
 
 		logger.info("Pasamos por MenuController");
 
-		return new ModelAndView("search.interprent.page");
+		return new ModelAndView("search.book.page");
 
 	}
 }

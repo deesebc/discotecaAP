@@ -10,11 +10,12 @@
 	      </ul>
 	    </div>
 	    <div class="menu-item">
-	      <h4><a href="#"><spring:message code="general.interpret"/></a></h4>
+	      <h4><a href="#"><spring:message code="general.book"/></a></h4>
 	      <ul>
-	        <li><a href="<c:url value='/initSI.htm'/>"><spring:message code="general.search"/></a></li>
+	        <li><a href="<c:url value='/search/book.htm'/>"><spring:message code="general.search"/></a></li>
 	        <li><a href="#">Meet The Owners</a></li>
 	      </ul>
 	    </div>
 	</nav>
 </p>
+<!-- initSI -->

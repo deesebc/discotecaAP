@@ -20,14 +20,20 @@
 		<put-attribute name="content" value="/jsp/searchDisc.jsp" />
 	</definition>
 	
-	<definition name="search.interprent.page" extends="base.definition">
+	<definition name="search.book.page" extends="base.definition">
 		<put-attribute name="title" value="Busqueda Int" />
-		<put-attribute name="content" value="/jsp/searchInterprent.jsp" />
+		<put-attribute name="content" value="/jsp/searchBook.jsp" />
 	</definition>
 	
 	<definition name="edit.disc.page" extends="base.definition">
 		<put-attribute name="title" value="Edicion" />
 		<put-attribute name="content" value="/jsp/editDisc.jsp" />
 	</definition>
+	
+	<definition name="edit.book.page" extends="base.definition">
+		<put-attribute name="title" value="Edicion" />
+		<put-attribute name="content" value="/jsp/editBook.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

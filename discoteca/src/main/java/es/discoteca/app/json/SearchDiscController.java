@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,9 @@ public class SearchDiscController implements Serializable {
 	@Autowired
 	private DiscoService service;
 
+	@Autowired
+	private Mapper mapper;
+
 	@RequestMapping(value = "/jsonSearchDisc.htm", produces = "application/json")
 	public @ResponseBody
 	JqGridResponse<DiscoJson> records(@RequestBody final JqGridRequest jqGridRequest,
@@ -45,9 +49,7 @@ public class SearchDiscController implements Serializable {
 		List<Disco> list = service.findAll();
 		List<DiscoJson> list2 = new ArrayList<DiscoJson>();
 		for (Disco disco : list) {
-			DiscoJson bean = new DiscoJson();
-			bean.setNombre(disco.getNombre());
-			bean.setGrupo(disco.getGrupo());
+			DiscoJson bean = mapper.map(disco, DiscoJson.class);
 			list2.add(bean);
 		}
 		JqGridResponse<DiscoJson> exit = new JqGridResponse<DiscoJson>();
