@@ -3,10 +3,11 @@ $(function() {
 		   	url:contexPath + "/jsonSearchBook.htm",
 			datatype: 'json',
 			mtype: 'POST',
-		   	colNames:['Nombre', 'Autor'],
+		   	colNames:['Nombre', 'Autor', 'Identificador'],
 		   	colModel:[
 		   		{name:'nombre',index:'nombre', width:100, editable:true, editrules:{required:true}, editoptions:{size:10}},
 		   		{name:'autor',index:'autor', width:100, editable:true, editrules:{required:true}, editoptions:{size:10}},
+		   		{name:'ident',index:'ident', hidden:true}
 		   	],
 		   	postData: {},
 			rowNum:10,
@@ -85,7 +86,16 @@ $(function() {
 function addRow(){
 	window.location.href = contexPath + '/create/book.htm';
 }
-function deleteRow(){}
+function deleteRow(){
+	//con redireccion
+	var grid = jQuery('#grid');
+	var sel_id = grid.jqGrid('getGridParam', 'selrow');
+	var myCellData = grid.jqGrid('getCell', sel_id, 'ident');
+	console.log(myCellData);
+	window.location.href = contexPath + '/delete/book.htm?id=' + myCellData;
+	//con json los otros ejemplos
+	
+}
 function editRow() {
     // Redireccionar a la pagina de Edicion de Registro, con el ultimo seleccionado
     var row = jQuery("#grid").jqGrid('getGridParam','selrow');

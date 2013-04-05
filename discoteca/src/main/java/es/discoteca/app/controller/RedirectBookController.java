@@ -41,6 +41,16 @@ public class RedirectBookController {
 		return model;
 	}
 
+	@RequestMapping(value = "delete/book.htm")
+	public ModelAndView deleteBook(@RequestParam final String id, final HttpServletRequest request,
+			final HttpServletResponse response) throws ServletException, IOException {
+		logger.info("RedirectBookController - deleteBook");
+		Libro disco = service.findById(Integer.valueOf(id));
+		service.remove(disco);
+		ModelAndView model = new ModelAndView("search.book.page");
+		return model;
+	}
+
 	@RequestMapping(value = "edit/book.htm")
 	public ModelAndView editBook(@RequestParam final String id, final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException, IOException {
