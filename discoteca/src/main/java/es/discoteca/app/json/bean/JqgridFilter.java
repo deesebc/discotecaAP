@@ -1,108 +1,45 @@
 package es.discoteca.app.json.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JqgridFilter {
 
-	/**
-	 * Inner class containing field rules
-	 */
-	public static class Rule {
-		@JsonProperty(value = "junction")
-		private String junction;
-		@JsonProperty(value = "field")
-		private String field;
-		@JsonProperty(value = "op")
-		private String op;
-		@JsonProperty(value = "data")
-		private String data;
-
-		public Rule() {
-		}
-
-		public Rule(final String junction, final String field, final String op, final String data) {
-			super();
-			this.junction = junction;
-			this.field = field;
-			this.op = op;
-			this.data = data;
-		}
-
-		public String getData() {
-			return data;
-		}
-
-		public String getField() {
-			return field;
-		}
-
-		public String getJunction() {
-			return junction;
-		}
-
-		public String getOp() {
-			return op;
-		}
-
-		public void setData(final String data) {
-			this.data = data;
-		}
-
-		public void setField(final String field) {
-			this.field = field;
-		}
-
-		public void setJunction(final String junction) {
-			this.junction = junction;
-		}
-
-		public void setOp(final String op) {
-			this.op = op;
-		}
-
-	}
-
-	@JsonProperty(value = "source")
-	private String source;
 	@JsonProperty(value = "groupOp")
 	private String groupOp;
 
 	@JsonProperty(value = "rules")
-	private List<Rule> rules;
+	private List<JqRules> rules;
 
 	public JqgridFilter() {
 		super();
+		rules = new ArrayList<JqRules>();
 	}
 
-	public JqgridFilter(final String source) {
+	public JqgridFilter(final String groupOp, final List<JqRules> rules) {
 		super();
-		this.source = source;
+		this.groupOp = groupOp;
+		this.rules = rules;
 	}
 
 	public String getGroupOp() {
 		return groupOp;
 	}
 
-	public List<Rule> getRules() {
+	public List<JqRules> getRules() {
 		return rules;
-	}
-
-	public String getSource() {
-		return source;
 	}
 
 	public void setGroupOp(final String groupOp) {
 		this.groupOp = groupOp;
 	}
 
-	public void setRules(final List<Rule> rules) {
+	public void setRules(final List<JqRules> rules) {
 		this.rules = rules;
-	}
-
-	public void setSource(final String source) {
-		this.source = source;
 	}
 
 }

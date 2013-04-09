@@ -17,12 +17,18 @@
 	<fieldset>
 		<legend><spring:message code="general.edit"/></legend>
 		<div>
-			<form:label path="nombre"><spring:message code="general.name"/></form:label>&nbsp;<form:input path="nombre" /><br/>
-			<form:label path="autor"><spring:message code="general.author.name"/></form:label>&nbsp;<form:input path="autor" /><br/>
-			<form:label path="serie"><spring:message code="general.serie.name"/></form:label>&nbsp;<form:input path="serie" /><br/>
-			<form:label path="volumen"><spring:message code="general.volumen.name"/></form:label>&nbsp;<form:input path="volumen" /><br/>
-			<form:label path="argumento"><spring:message code="general.argument.name"/></form:label>&nbsp;<form:input path="argumento" /><br/>
-			<form:label path="paginas"><spring:message code="general.pages.name"/></form:label>&nbsp;<form:input path="paginas" /><br/>
+			<div class="width20 height25 floatLeft"><form:label path="nombre"><spring:message code="general.name"/></form:label></div>
+			<div class="width50 height25"><form:input path="nombre" /></div>
+			<div class="width20 height25 floatLeft"><form:label path="autor"><spring:message code="general.author.name"/></form:label></div>
+			<div class="width50 height25"><form:input path="autor" /></div>
+			<div class="width20 height25 floatLeft"><form:label path="serie"><spring:message code="general.serie.name"/></form:label></div>
+			<div class="width50 height25"><form:input path="serie" /></div>
+			<div class="width20 height25 floatLeft"><form:label path="volumen"><spring:message code="general.volumen.name"/></form:label></div>
+			<div class="width50 height25"><form:input path="volumen" /></div>
+			<div class="width20 height25 floatLeft"><form:label path="argumento"><spring:message code="general.argument.name"/></form:label></div>
+			<div class="width50 height25"><form:input path="argumento" /></div>
+			<div class="width20 height25 floatLeft"><form:label path="paginas"><spring:message code="general.pages.name"/></form:label></div>
+			<div class="width50 height25"><form:input path="paginas" /></div>
 			<button id="acceptButton" type="submit" title="<spring:message code='general.button.accept'/>"><spring:message code="general.button.accept"/></button>
 		</div>
 	</fieldset>

@@ -18,23 +18,15 @@ public class JqGridRequest {
 	@JsonProperty(value = "_search")
 	public Boolean search;
 	@JsonProperty(value = "filters")
-	public String filters;
+	public String filters; // filtro
 	@JsonProperty(value = "page")
-	public Integer page;
+	public Integer page; // pagina
 	@JsonProperty(value = "rows")
-	public Integer rows;
+	public Integer rows; // cantidad por pagina
 	@JsonProperty(value = "sidx")
-	public String sidx;
+	public String sidx; // campo ordenacion
 	@JsonProperty(value = "sord")
-	public String sord;
-
-	//
-	// @RequestParam("_search") final Boolean search,
-	// @RequestParam(value = "filters", required = false) final String filters,
-	// @RequestParam(value = "page", required = false) final Integer page,
-	// @RequestParam(value = "rows", required = false) final Integer rows,
-	// @RequestParam(value = "sidx", required = false) final String sidx,
-	// @RequestParam(value = "sord", required = false) final String sord
+	public String sord; // sentido ordenacion
 
 	public String getFilters() {
 		return filters;

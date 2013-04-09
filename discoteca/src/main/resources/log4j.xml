@@ -9,7 +9,7 @@
 		</layout>
 	</appender>
 
-	<category name="es.homediscoteca">
+	<category name="es.discoteca.app">
 		<priority value="DEBUG" />
 	</category>
 	

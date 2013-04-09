@@ -3,18 +3,18 @@ $(function() {
 		   	url:contexPath + "/jsonSearchBook.htm",
 			datatype: 'json',
 			mtype: 'POST',
-		   	colNames:['Nombre', 'Autor', 'Identificador'],
+		   	colNames:['Nombre', 'Serie', 'Autor', 'Identificador'],
 		   	colModel:[
-		   		{name:'nombre',index:'nombre', width:100, editable:true, editrules:{required:true}, editoptions:{size:10}},
-		   		{name:'autor',index:'autor', width:100, editable:true, editrules:{required:true}, editoptions:{size:10}},
+		   		{name:'nombre',index:'nombre', search:true, stype:'text', width:100, editable:true, editrules:{required:true}, editoptions:{size:10}},
+		   		{name:'serie',index:'serie', search:true, stype:'text', width:100, editable:true, editrules:{required:true}, editoptions:{size:10}},
+		   		{name:'autor',index:'autor', search:true, stype:'text', width:100, editable:true, editrules:{required:true}, editoptions:{size:10}},
 		   		{name:'ident',index:'ident', hidden:true}
 		   	],
 		   	postData: {},
 			rowNum:10,
-		   	rowList:[10,20,40,60],
+		   	rowList:[10,20,50],
 		   	height: 240,
 		   	autowidth: true,
-			rownumbers: true,
 		   	pager: '#pager',
 		   	sortname: 'nombre',
 		    viewrecords: true,
@@ -80,7 +80,7 @@ $(function() {
 		);
  	
 		// Toolbar Search
-		$("#grid").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true, defaultSearch:"cn"});
+		//$("#grid").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true, defaultSearch:"cn"});
 	});
 
 function addRow(){
@@ -98,10 +98,12 @@ function deleteRow(){
 }
 function editRow() {
     // Redireccionar a la pagina de Edicion de Registro, con el ultimo seleccionado
-    var row = jQuery("#grid").jqGrid('getGridParam','selrow');
+	var grid = jQuery('#grid');
+    var row = grid.jqGrid('getGridParam','selrow');
+    var ident = grid.jqGrid('getCell', row, 'ident');
     
     if( row != null ) {
-        window.location.href = contexPath + '/edit/book.htm?id=' + row;
+        window.location.href = contexPath + '/edit/book.htm?id=' + ident;
     } else { 
         jQuery( "#dialogSelectRow" ).dialog({
                 buttons: { OK: function() {

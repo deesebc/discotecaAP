@@ -3,6 +3,7 @@
  */
 package es.discoteca.app.json;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +44,20 @@ public class SearchBookController implements Serializable {
 
 	@Autowired
 	private Mapper mapper;
+
+	private void method(final String filter) throws JsonProcessingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode jsonFilter = mapper.readTree(filter);
+		String groupOp = jsonFilter.get("groupOp").asText();
+		LOGGER.debug("groupOp :" + groupOp);
+		List<JsonNode> rules = jsonFilter.findValues("rules");
+		LOGGER.debug("Count Rules :" + rules.size());
+		for (JsonNode node : rules) {
+			LOGGER.debug("field :" + node.get("field").asText());
+			LOGGER.debug("op :" + node.get("op").asText());
+			LOGGER.debug("data :" + node.get("data").asText());
+		}
+	}
 
 	@RequestMapping(value = "/jsonSearchBook.htm", produces = "application/json")
 	public @ResponseBody

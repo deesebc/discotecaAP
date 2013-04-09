@@ -33,8 +33,7 @@ public class SaveBookController {
 			throws ServletException, IOException {
 		try {
 			if (form.getIdent() == null) {
-				service.create(form.getNombre(), form.getAutor(), form.getArgumento(),
-						Integer.toString(form.getPaginas()));
+				service.create(form);
 			} else {
 				service.update(form);
 			}

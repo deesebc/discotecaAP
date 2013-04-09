@@ -55,9 +55,9 @@ public class RedirectBookController {
 	public ModelAndView editBook(@RequestParam final String id, final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException, IOException {
 		logger.info("RedirectBookController - editBook");
-		Libro disco = service.findById(Integer.valueOf(id));
+		Libro libro = service.findById(Integer.valueOf(id));
 		ModelAndView model = new ModelAndView("edit.book.page");
-		model.addObject("libro", disco);
+		model.addObject("libro", libro);
 
 		return model;
 	}
