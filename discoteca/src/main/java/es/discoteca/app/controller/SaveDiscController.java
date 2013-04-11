@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.discoteca.app.json.bean.StatusResponse;
-import es.discoteca.bbdd.bean.Cancion;
-import es.discoteca.bbdd.bean.Disco;
-import es.discoteca.bbdd.bean.Interprete;
-import es.discoteca.bbdd.service.DiscoService;
+import es.home.almacen.bbdd.bean.Cancion;
+import es.home.almacen.bbdd.bean.Disco;
+import es.home.almacen.bbdd.bean.Interprete;
+import es.home.almacen.bbdd.service.DiscoService;
 
 /**
  * @author dsblanco

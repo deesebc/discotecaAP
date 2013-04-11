@@ -15,8 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import es.discoteca.bbdd.bean.Disco;
-import es.discoteca.bbdd.service.DiscoService;
+import es.home.almacen.bbdd.bean.Disco;
+import es.home.almacen.bbdd.service.DiscoService;
 
 /**
  * @author dsblanco

@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import es.discoteca.app.json.bean.InterpreteJson;
 import es.discoteca.app.json.bean.JqGridRequest;
 import es.discoteca.app.json.bean.JqGridResponse;
-import es.discoteca.bbdd.bean.Disco;
-import es.discoteca.bbdd.bean.Interprete;
-import es.discoteca.bbdd.service.DiscoService;
+import es.home.almacen.bbdd.bean.Disco;
+import es.home.almacen.bbdd.bean.Interprete;
+import es.home.almacen.bbdd.service.DiscoService;
 
 /**
  * @author xe29197

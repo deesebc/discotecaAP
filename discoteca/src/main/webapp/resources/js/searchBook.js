@@ -11,8 +11,8 @@ $(function() {
 		   		{name:'ident',index:'ident', hidden:true}
 		   	],
 		   	postData: {},
-			rowNum:10,
-		   	rowList:[10,20,50],
+			rowNum:2,
+		   	rowList:[2,10,20,50],
 		   	height: 240,
 		   	autowidth: true,
 		   	pager: '#pager',

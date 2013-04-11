@@ -45,6 +45,6 @@
 	</bean>
 
 	<!-- Import -->
-	<import resource="classpath*:conf/appContextDBD.xml" />
+	<import resource="classpath*:conf/repository.xml" />
 
 </beans>

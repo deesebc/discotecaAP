@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.discoteca.bbdd.bean.Disco;
-import es.discoteca.bbdd.service.DiscoService;
+import es.home.almacen.bbdd.bean.Disco;
+import es.home.almacen.bbdd.service.DiscoService;
 
 /**
  * @author xe29197
