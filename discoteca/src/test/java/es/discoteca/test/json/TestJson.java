@@ -36,6 +36,7 @@ public class TestJson {
 	@Test
 	public void metodo3() {
 		try {
+			LOGGER.info("Inicio");
 			ObjectMapper mapper = new ObjectMapper();
 			JqgridFilter objeto = new JqgridFilter();
 			objeto.setGroupOp("AND");
