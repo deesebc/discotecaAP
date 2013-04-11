@@ -40,6 +40,10 @@
 			</properties>
 		</profile>
 	</profiles>
+	
+	<properties>
+		<spring.version>3.1.2.RELEASE</spring.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -118,7 +122,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<properties>
-		<spring.version>3.1.0.RELEASE</spring.version>
-	</properties>
 </project>
