@@ -36,6 +36,13 @@ public class JqGridResponse<T> {
 	@JsonProperty(value = "rows")
 	private List<T> rows;
 
+	@JsonProperty(value = "error")
+	private String error;
+
+	public String getError() {
+		return error;
+	}
+
 	public String getPage() {
 		return page;
 	}
@@ -50,6 +57,10 @@ public class JqGridResponse<T> {
 
 	public String getTotal() {
 		return total;
+	}
+
+	public void setError(final String error) {
+		this.error = error;
 	}
 
 	public void setPage(final String page) {

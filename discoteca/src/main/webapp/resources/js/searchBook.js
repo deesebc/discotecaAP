@@ -22,7 +22,6 @@ $(function() {
 		    caption:"Books",
 		    emptyrecords: "Empty books",
 		    loadonce: false,
-		    loadComplete: function() {},
 		    serializeGridData: function(postData) {
 			    return JSON.stringify(postData);
 			},
@@ -35,6 +34,23 @@ $(function() {
 		        repeatitems: false,
 		        cell: "cell",
 		        id: "id"
+		    },loadError : function(xhr,st,err) {
+		    	console.log('loadError - xhr: '+xhr);
+		    	console.log('loadError - st: '+st);
+		    	console.log('loadError - err: '+err);
+		    },loadComplete: function(data) {
+		    	if(data.error != null){
+			    	$('#msgbox').text('Ha ocurrido un error en la carga');
+					$('#msgbox').dialog({
+						title : 'Error',
+						modal : true,
+						buttons : {
+							"Ok" : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+			    }
 		    }
 		});
 		

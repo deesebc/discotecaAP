@@ -80,12 +80,15 @@ public class SearchBookController implements Serializable {
 	JqGridResponse<LibroJson> records(@RequestBody final JqGridRequest jqGridRequest,
 			final HttpServletRequest request, final HttpServletResponse response) {
 		Page<Libro> page = null;
+		JqGridResponse<LibroJson> exit = new JqGridResponse<LibroJson>();
 		try {
 			Pageable pageable = utility.getPageable(jqGridRequest);
 			page = getLibro(jqGridRequest.getFilters(), pageable);
+			exit = utility.getBookJqGridRes(page, LibroJson.class);
 		} catch (Exception except) {
+			exit.setError("Error en la busqueda: " + except.getMessage());
 			LOGGER.error("Error en la busqueda: ", except);
 		}
-		return utility.getBookJqGridRes(page, LibroJson.class);
+		return exit;
 	}
 }

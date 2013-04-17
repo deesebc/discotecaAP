@@ -78,13 +78,15 @@ public class SearchDiscController implements Serializable {
 	JqGridResponse<DiscoJson> records(@RequestBody final JqGridRequest jqGridRequest,
 			final HttpServletRequest request, final HttpServletResponse response) {
 
-		Page<Disco> page = null;
+		JqGridResponse<DiscoJson> exit = new JqGridResponse<DiscoJson>();
 		try {
 			Pageable pageable = utility.getPageable(jqGridRequest);
-			page = getDisco(jqGridRequest.getFilters(), pageable);
+			Page<Disco> page = getDisco(jqGridRequest.getFilters(), pageable);
+			exit = utility.getBookJqGridRes(page, DiscoJson.class);
 		} catch (Exception except) {
+			exit.setError("Error en la busqueda: " + except.getMessage());
 			LOGGER.error("Error en la busqueda: ", except);
 		}
-		return utility.getBookJqGridRes(page, DiscoJson.class);
+		return exit;
 	}
 }
