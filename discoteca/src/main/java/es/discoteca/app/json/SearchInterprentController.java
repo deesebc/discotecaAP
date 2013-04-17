@@ -3,16 +3,17 @@
  */
 package es.discoteca.app.json;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.dozer.Mapper;
+import org.codehaus.jackson.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import es.discoteca.app.json.bean.InterpreteJson;
 import es.discoteca.app.json.bean.JqGridRequest;
 import es.discoteca.app.json.bean.JqGridResponse;
-import es.home.almacen.bbdd.bean.Disco;
+import es.discoteca.app.util.PaginatorUtil;
 import es.home.almacen.bbdd.bean.Interprete;
-import es.home.almacen.bbdd.service.DiscoService;
+import es.home.almacen.bbdd.service.InterpreteService;
 
 /**
  * @author xe29197
@@ -35,13 +36,18 @@ public class SearchInterprentController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final static Logger LOGGER = Logger.getLogger(SearchSongController.class);
+	private final static Logger LOGGER = Logger.getLogger(SearchInterprentController.class);
 
 	@Autowired
-	private DiscoService service;
+	private InterpreteService service;
 
 	@Autowired
-	private Mapper mapper;
+	private PaginatorUtil<Interprete, InterpreteJson> utility;
+
+	private Page<Interprete> getInterpretes(final String idDisco, final Pageable pageable)
+			throws JsonProcessingException, IOException {
+		return service.findAllByIdDisc(Integer.valueOf(idDisco), pageable);
+	}
 
 	@RequestMapping(value = "/jsonSearchSinger.htm", produces = "application/json")
 	public @ResponseBody
@@ -49,16 +55,13 @@ public class SearchInterprentController implements Serializable {
 			@RequestParam final String id, final HttpServletRequest request,
 			final HttpServletResponse response) {
 
-		Disco disco = service.findById(Integer.valueOf(id));
-		List<InterpreteJson> list2 = new ArrayList<InterpreteJson>();
-		for (Interprete cancion : disco.getInterpretes()) {
-			InterpreteJson bean = mapper.map(cancion, InterpreteJson.class);
-			list2.add(bean);
+		Page<Interprete> page = null;
+		try {
+			Pageable pageable = utility.getPageable(jqGridRequest);
+			page = getInterpretes(id, pageable);
+		} catch (Exception except) {
+			LOGGER.error("Error en la busqueda: ", except);
 		}
-		JqGridResponse<InterpreteJson> exit = new JqGridResponse<InterpreteJson>();
-		exit.setRows(list2);
-		exit.setTotal(Integer.toString(list2.size()));
-		exit.setPage("1");
-		return exit;
+		return utility.getBookJqGridRes(page, InterpreteJson.class);
 	}
 }

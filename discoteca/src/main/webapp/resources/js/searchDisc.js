@@ -41,7 +41,9 @@ $(function() {
 				{edit:false, add:false, del:false, search:true},
 				{}, {}, {}, 
 				{ 	// search
-					sopt:['cn', 'eq', 'ne', 'lt', 'gt', 'bw', 'ew'],
+//					sopt:['cn', 'eq', 'ne', 'lt', 'gt', 'bw', 'ew'],
+					sopt:['cn'],
+					groupOps: [ { op: "AND", text: "all" } ],
 					closeOnEscape: true, 
 					multipleSearch: true, 
 					closeAfterSearch: true
@@ -79,7 +81,7 @@ $(function() {
 		);
  	
 		// Toolbar Search
-		$("#grid").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true, defaultSearch:"cn"});
+//		$("#grid").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true, defaultSearch:"cn"});
 	});
 
 function addRow(){}
