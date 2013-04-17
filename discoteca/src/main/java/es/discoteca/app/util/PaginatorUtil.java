@@ -63,19 +63,4 @@ public final class PaginatorUtil<C, J> {
 		return exit;
 	}
 
-	// private void method(final String filter) throws JsonProcessingException,
-	// IOException {
-	// ObjectMapper mapper = new ObjectMapper();
-	// JsonNode jsonFilter = mapper.readTree(filter);
-	// String groupOp = jsonFilter.get("groupOp").asText();
-	// LOGGER.debug("groupOp :" + groupOp);
-	// List<JsonNode> rules = jsonFilter.findValues("rules");
-	// LOGGER.debug("Count Rules :" + rules.size());
-	// for (JsonNode node : rules) {
-	// LOGGER.debug("field :" + node.get("field").asText());
-	// LOGGER.debug("op :" + node.get("op").asText());
-	// LOGGER.debug("data :" + node.get("data").asText());
-	// }
-	// }
-
 }

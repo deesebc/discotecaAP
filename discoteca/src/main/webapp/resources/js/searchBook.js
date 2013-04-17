@@ -42,7 +42,9 @@ $(function() {
 				{edit:false, add:false, del:false, search:true},
 				{}, {}, {}, 
 				{ 	// search
-					sopt:['cn', 'eq', 'ne', 'lt', 'gt', 'bw', 'ew'],
+//					sopt:['cn', 'eq', 'ne', 'lt', 'gt', 'bw', 'ew'],
+					sopt:['eq'],
+					groupOps: [ { op: "AND", text: "all" } ],
 					closeOnEscape: true, 
 					multipleSearch: true, 
 					closeAfterSearch: true
