@@ -1,7 +1,19 @@
 $(function() {
 	$("#grupo").autocomplete({
 		source : contexPath + "/jsonAutoCompleteGroupName.htm",
-		minLength : 3
+		minLength : 3,
+        error: function () {
+        	$('#msgbox').text('Ha ocurrido un error en la carga');
+			$('#msgbox').dialog({
+				title : 'Error',
+				modal : true,
+				buttons : {
+					"Ok" : function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+        }
 	});
 	
 	$("#gridSingers").jqGrid({
@@ -57,8 +69,20 @@ $(function() {
 		caption : "Singers",
 		emptyrecords : "Empty singers",
 		loadonce : false,
-		loadComplete : function() {
-		},
+		loadComplete: function(data) {
+	    	if(data.error != null){
+		    	$('#msgbox').text('Ha ocurrido un error en la carga');
+				$('#msgbox').dialog({
+					title : 'Error',
+					modal : true,
+					buttons : {
+						"Ok" : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+		    }
+	    },
 		serializeGridData : function(postData) {
 			return JSON.stringify(postData);
 		},
@@ -173,8 +197,20 @@ $(function() {
 		caption : "Songs",
 		emptyrecords : "Empty songs",
 		loadonce : false,
-		loadComplete : function() {
-		},
+		loadComplete: function(data) {
+	    	if(data.error != null){
+		    	$('#msgbox').text('Ha ocurrido un error en la carga');
+				$('#msgbox').dialog({
+					title : 'Error',
+					modal : true,
+					buttons : {
+						"Ok" : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+		    }
+	    },
 		serializeGridData : function(postData) {
 			return JSON.stringify(postData);
 		},

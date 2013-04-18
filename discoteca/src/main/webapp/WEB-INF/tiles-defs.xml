@@ -15,6 +15,11 @@
 		<put-attribute name="content" value="/jsp/hello.jsp" />
 	</definition>
 	
+	<definition name="error.page" extends="base.definition">
+		<put-attribute name="title" value="Error Example" />
+		<put-attribute name="content" value="/jsp/error.jsp" />
+	</definition>
+	
 	<definition name="search.disc.page" extends="base.definition">
 		<put-attribute name="title" value="Busqueda" />
 		<put-attribute name="content" value="/jsp/searchDisc.jsp" />

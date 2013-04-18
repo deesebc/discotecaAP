@@ -55,13 +55,15 @@ public class SearchSongController implements Serializable {
 			@RequestParam final String id, final HttpServletRequest request,
 			final HttpServletResponse response) {
 
-		Page<Cancion> page = null;
+		JqGridResponse<CancionJson> exit = new JqGridResponse<CancionJson>();
 		try {
 			Pageable pageable = utility.getPageable(jqGridRequest);
-			page = getCanciones(id, pageable);
+			Page<Cancion> page = getCanciones(id, pageable);
+			exit = utility.getBookJqGridRes(page, CancionJson.class);
 		} catch (Exception except) {
+			exit.setError("Error en la busqueda: " + except.getMessage());
 			LOGGER.error("Error en la busqueda: ", except);
 		}
-		return utility.getBookJqGridRes(page, CancionJson.class);
+		return exit;
 	}
 }

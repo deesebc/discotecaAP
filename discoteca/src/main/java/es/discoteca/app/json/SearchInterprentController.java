@@ -55,13 +55,15 @@ public class SearchInterprentController implements Serializable {
 			@RequestParam final String id, final HttpServletRequest request,
 			final HttpServletResponse response) {
 
-		Page<Interprete> page = null;
+		JqGridResponse<InterpreteJson> exit = new JqGridResponse<InterpreteJson>();
 		try {
 			Pageable pageable = utility.getPageable(jqGridRequest);
-			page = getInterpretes(id, pageable);
+			Page<Interprete> page = getInterpretes(id, pageable);
+			exit = utility.getBookJqGridRes(page, InterpreteJson.class);
 		} catch (Exception except) {
+			exit.setError("Error en la busqueda: " + except.getMessage());
 			LOGGER.error("Error en la busqueda: ", except);
 		}
-		return utility.getBookJqGridRes(page, InterpreteJson.class);
+		return exit;
 	}
 }
