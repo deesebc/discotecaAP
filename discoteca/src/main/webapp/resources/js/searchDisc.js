@@ -96,7 +96,9 @@ $(function() {
 //		$("#grid").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : true, defaultSearch:"cn"});
 	});
 
-function addRow(){}
+function addRow(){
+	window.location.href = contexPath + '/create/disc.htm';
+}
 function deleteRow(){}
 function editRow() {
     // Redireccionar a la pagina de Edicion de Registro, con el ultimo seleccionado

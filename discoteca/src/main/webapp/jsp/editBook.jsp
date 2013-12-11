@@ -29,6 +29,8 @@
 			<div class="width50 height25"><form:input path="argumento" /></div>
 			<div class="width20 height25 floatLeft"><form:label path="paginas"><spring:message code="general.pages.name"/></form:label></div>
 			<div class="width50 height25"><form:input path="paginas" /></div>
+			<div class="width20 height25 floatLeft"><form:label path="publicacion"><spring:message code="general.publicacion.name"/></form:label></div>
+			<div class="width50 height25"><form:input path="publicacion" /></div>
 			<button id="acceptButton" type="submit" title="<spring:message code='general.button.accept'/>"><spring:message code="general.button.accept"/></button>
 		</div>
 	</fieldset>

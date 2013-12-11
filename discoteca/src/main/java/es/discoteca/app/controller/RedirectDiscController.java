@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.home.almacen.bbdd.bean.Disco;
+import es.home.almacen.bbdd.bean.Libro;
 import es.home.almacen.bbdd.service.DiscoService;
 
 /**
@@ -30,6 +31,16 @@ public class RedirectDiscController {
 
 	@Autowired
 	DiscoService service;
+	
+	@RequestMapping(value = "create/disc.htm")
+	public ModelAndView createDisc(final HttpServletRequest request,
+			final HttpServletResponse response) throws ServletException, IOException {
+		logger.info("RedirectBookController - createDisc");
+		Disco disco = new Disco();
+		ModelAndView model = new ModelAndView("edit.disc.page");
+		model.addObject("disco", disco);
+		return model;
+	}
 
 	@RequestMapping(value = "edit/disc.htm")
 	public ModelAndView searchDisc(@RequestParam final String id, final HttpServletRequest request,
