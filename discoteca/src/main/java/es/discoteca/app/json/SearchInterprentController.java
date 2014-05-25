@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class SearchInterprentController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final static Logger LOGGER = Logger.getLogger(SearchInterprentController.class);
+	private final static Logger LOGGER = Logger
+			.getLogger(SearchInterprentController.class);
 
 	@Autowired
 	private InterpreteService service;
@@ -44,22 +46,28 @@ public class SearchInterprentController implements Serializable {
 	@Autowired
 	private PaginatorUtil<Interprete, InterpreteJson> utility;
 
-	private Page<Interprete> getInterpretes(final String idDisco, final Pageable pageable)
-			throws JsonProcessingException, IOException {
+	private Page<Interprete> getInterpretes(final String idDisco,
+			final Pageable pageable) throws JsonProcessingException,
+			IOException {
 		return service.findAllByIdDisc(Integer.valueOf(idDisco), pageable);
 	}
 
 	@RequestMapping(value = "/jsonSearchSinger.htm", produces = "application/json")
 	public @ResponseBody
-	JqGridResponse<InterpreteJson> records(@RequestBody final JqGridRequest jqGridRequest,
+	JqGridResponse<InterpreteJson> records(
+			@RequestBody final JqGridRequest jqGridRequest,
 			@RequestParam final String id, final HttpServletRequest request,
 			final HttpServletResponse response) {
 
 		JqGridResponse<InterpreteJson> exit = new JqGridResponse<InterpreteJson>();
 		try {
 			Pageable pageable = utility.getPageable(jqGridRequest);
-			Page<Interprete> page = getInterpretes(id, pageable);
-			exit = utility.getBookJqGridRes(page, InterpreteJson.class);
+			if (StringUtils.isNotBlank(id)) {
+				Page<Interprete> page = getInterpretes(id, pageable);
+				exit = utility.getBookJqGridRes(page, InterpreteJson.class);
+			} else {
+				LOGGER.info("ID vacio, no se realiza la busqueda");
+			}
 		} catch (Exception except) {
 			exit.setError("Error en la busqueda: " + except.getMessage());
 			LOGGER.error("Error en la busqueda: ", except);
