@@ -58,8 +58,8 @@ public class SearchDiscController implements Serializable {
 			List<JsonNode> rules = jsonFilter.findValues("rules");
 			String field, data, grupo = "", nombre = "";
 			for (JsonNode node : rules) {
-				field = node.findValues("field").get(0).asText();
-				data = node.findValues("data").get(0).asText();
+				field = node.findValues("field").get(0).getTextValue();
+				data = node.findValues("data").get(0).getTextValue();
 				if ("nombre".equals(field)) {
 					nombre = data;
 				} else if ("grupo".equals(field)) {
