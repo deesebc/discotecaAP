@@ -39,7 +39,8 @@ public class SearchBookController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger LOGGER = Logger.getLogger(SearchBookController.class);
+	private static final Logger LOGGER = Logger
+			.getLogger(SearchBookController.class);
 
 	@Autowired
 	private LibroService service;
@@ -49,6 +50,7 @@ public class SearchBookController implements Serializable {
 
 	private Page<Libro> getLibro(final String source, final Pageable pageable)
 			throws JsonProcessingException, IOException {
+		LOGGER.error("getLibro - init");
 		Page<Libro> exit = null;
 		if (StringUtils.isBlank(source)) {
 			exit = service.findSearchBooks(null, null, null, pageable);
@@ -58,8 +60,8 @@ public class SearchBookController implements Serializable {
 			List<JsonNode> rules = jsonFilter.findValues("rules");
 			String field, data, autor = "", nombre = "", serie = "";
 			for (JsonNode node : rules) {
-				field = node.findValues("field").get(0).asText();
-				data = node.findValues("data").get(0).asText();
+				field = node.findValues("field").get(0).getTextValue();
+				data = node.findValues("data").get(0).getTextValue();
 				if ("autor".equals(field)) {
 					autor = data;
 				} else if ("serie".equals(field)) {
@@ -77,8 +79,10 @@ public class SearchBookController implements Serializable {
 
 	@RequestMapping(value = "/jsonSearchBook.htm", produces = "application/json")
 	public @ResponseBody
-	JqGridResponse<LibroJson> records(@RequestBody final JqGridRequest jqGridRequest,
+	JqGridResponse<LibroJson> records(
+			@RequestBody final JqGridRequest jqGridRequest,
 			final HttpServletRequest request, final HttpServletResponse response) {
+		LOGGER.error("records - init");
 		Page<Libro> page = null;
 		JqGridResponse<LibroJson> exit = new JqGridResponse<LibroJson>();
 		try {
