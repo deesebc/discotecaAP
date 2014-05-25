@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class SearchSongController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final static Logger LOGGER = Logger.getLogger(SearchSongController.class);
+	private final static Logger LOGGER = Logger
+			.getLogger(SearchSongController.class);
 
 	@Autowired
 	private CancionService service;
@@ -44,22 +46,28 @@ public class SearchSongController implements Serializable {
 	@Autowired
 	private PaginatorUtil<Cancion, CancionJson> utility;
 
-	private Page<Cancion> getCanciones(final String idDisco, final Pageable pageable)
-			throws JsonProcessingException, IOException {
+	private Page<Cancion> getCanciones(final String idDisco,
+			final Pageable pageable) throws JsonProcessingException,
+			IOException {
 		return service.findAllByIdDisc(Integer.valueOf(idDisco), pageable);
 	}
 
 	@RequestMapping(value = "/jsonSearchSong.htm", produces = "application/json")
 	public @ResponseBody
-	JqGridResponse<CancionJson> records(@RequestBody final JqGridRequest jqGridRequest,
+	JqGridResponse<CancionJson> records(
+			@RequestBody final JqGridRequest jqGridRequest,
 			@RequestParam final String id, final HttpServletRequest request,
 			final HttpServletResponse response) {
 
 		JqGridResponse<CancionJson> exit = new JqGridResponse<CancionJson>();
 		try {
-			Pageable pageable = utility.getPageable(jqGridRequest);
-			Page<Cancion> page = getCanciones(id, pageable);
-			exit = utility.getBookJqGridRes(page, CancionJson.class);
+			if (StringUtils.isNotBlank(id)) {
+				Pageable pageable = utility.getPageable(jqGridRequest);
+				Page<Cancion> page = getCanciones(id, pageable);
+				exit = utility.getBookJqGridRes(page, CancionJson.class);
+			} else {
+				LOGGER.info("Id vacio, no se realiza busqueda");
+			}
 		} catch (Exception except) {
 			exit.setError("Error en la busqueda: " + except.getMessage());
 			LOGGER.error("Error en la busqueda: ", except);
