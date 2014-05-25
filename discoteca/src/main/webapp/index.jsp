@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Discoteca</title>
+<title><spring:message code="general.app.name"/></title>
 </head>
 <body>
 <%-- Redirected because we can't set the welcome page to a virtual URL. --%>
-<c:redirect url="hello.htm"/>
+<c:redirect url="/hello.htm"/>
 </body>
 </html>
