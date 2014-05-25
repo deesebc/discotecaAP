@@ -26,14 +26,14 @@ public final class FilterUtil {
 
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode jsonFilter = mapper.readTree(source);
-		String groupOp = jsonFilter.get("groupOp").asText();
+		String groupOp = jsonFilter.get("groupOp").getTextValue();
 		LOGGER.debug("groupOp :" + groupOp);
 		List<JsonNode> rules = jsonFilter.findValues("rules");
 		LOGGER.debug("Count Rules :" + rules.size());
 		String field, data;
 		for (JsonNode node : rules) {
-			field = node.get("field").asText();
-			data = node.get("data").asText();
+			field = node.get("field").getTextValue();
+			data = node.get("data").getTextValue();
 			if ("autor".equals(field)) {
 				book.setAutor(data);
 			} else if ("serie".equals(field)) {
