@@ -1,1 +1,2 @@
-<p>This is the Header</p>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<p><spring:message code="general.app.name"/></p>
