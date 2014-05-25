@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
     var contexPath = "<%=request.getContextPath() %>";
 </script>
@@ -22,16 +23,19 @@
 			<button id="acceptButton" type="submit" title="<spring:message code='general.button.accept'/>"><spring:message code="general.button.accept"/></button>
 		</div>
 	</fieldset>
-	<div id='jqgrid'>
-		<table id='gridSingers'></table>
-		<div id='pagerSingers'></div>
-	</div>
-	<br/><br/>
-	<div id='jqgrid'>
-		<table id='gridSongs'></table>
-		<div id='pagerSongs'></div>
-	</div>
-	<div id='msgbox' title='' style='display:none'></div>
+	<c:if test="${not empty disco.ident}">
+		<div id='jqgrid'>
+			<table id='gridSingers'></table>
+			<div id='pagerSingers'></div>
+		</div>
+		<br/><br/>
+		<div id='jqgrid'>
+			<table id='gridSongs'></table>
+			<div id='pagerSongs'></div>
+		</div>
+		<div id='msgbox' title='' style='display:none'></div>
+	</c:if>
+	
 </p>
 <form:hidden path="ident" id="idDisc" />
 </form:form>
