@@ -158,13 +158,6 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- RUNTIME -->
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>1.6.2</version>
-			<scope>runtime</scope>
-		</dependency>
 		<!-- TEST -->
 		<dependency>
 			<groupId>junit</groupId>
