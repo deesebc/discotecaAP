@@ -7,10 +7,10 @@
 		</layout>
 	</appender>
 	
-	<category name="es.discoteca.app">
+	<category name="es.discoteca">
 		<priority value="debug" />
 	</category>
-
+	
 	<root>
 		<level value="warn" />
 		<appender-ref ref="console" />
