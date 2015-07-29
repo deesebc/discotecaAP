@@ -1,6 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
     	http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -8,10 +9,16 @@
         http://www.springframework.org/schema/context/spring-context-3.2.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<context:component-scan base-package="es.discoteca.app"></context:component-scan>
+	
+	<!-- <context:property-placeholder  location="classpath*:*.properties"/> -->
+	<util:properties id="propertyConfigurator" location="classpath:/application.properties"/>
+	<context:property-placeholder properties-ref="propertyConfigurator" />
 
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
 
@@ -35,7 +42,7 @@
 			</list>
 		</property>
 	</bean>
-
+	
 	<!-- CONF I18N -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">

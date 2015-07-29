@@ -19,6 +19,18 @@ fieldset{
 	height: 25px;
 }
 
+.height50{
+	height: 50px;
+}
+
+.height60{
+	height: 60px;
+}
+
+.width80{
+	width: 80%;
+}
+
 .width50{
 	width: 50%;
 }

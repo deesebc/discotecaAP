@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.discoteca.app.constants.ConstansUtil;
 import es.home.almacen.bbdd.bean.Libro;
 import es.home.almacen.bbdd.service.LibroService;
 
@@ -30,6 +31,9 @@ public class RedirectBookController {
 
 	@Autowired
 	LibroService service;
+	
+	@Autowired
+	ConstansUtil constansUtil;
 
 	@RequestMapping(value = "create/book.htm")
 	public ModelAndView createBook(final HttpServletRequest request,
@@ -57,6 +61,7 @@ public class RedirectBookController {
 		logger.info("RedirectBookController - editBook");
 		Libro libro = service.findById(Integer.valueOf(id));
 		ModelAndView model = new ModelAndView("edit.book.page");
+		logger.info("Debug mode"+constansUtil.getAppDebugMode());
 		model.addObject("libro", libro);
 
 		return model;

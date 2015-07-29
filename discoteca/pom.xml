@@ -11,6 +11,7 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 		<plugins>
@@ -24,13 +25,38 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<properties>
+		<spring.core.version>3.2.8.RELEASE</spring.core.version>
+		<spring.version>3.1.6.RELEASE</spring.version>
+		<spring.security.version>3.2.3.RELEASE</spring.security.version>
+		<log4j.version>1.2.16</log4j.version>
+		<spring.test.version>3.1.2.RELEASE</spring.test.version>
+		<junit.version>4.11</junit.version>
+		<property.global>global</property.global>
+		<property.profile>defaultValue</property.profile>
+	</properties>
 
 	<profiles>
 		<profile>
-			<id>sonar</id>
+			<id>local</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<properties>
+				<mvn.app.debug.mode>true</mvn.app.debug.mode>
+				<property.profile>localProfile</property.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<mvn.app.debug.mode>false</mvn.app.debug.mode>
+				<property.profile>proProfile</property.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>sonar</id>
 			<properties>
 				<sonar.jdbc.url><![CDATA[jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8]]>
 				</sonar.jdbc.url>
@@ -40,13 +66,6 @@
 			</properties>
 		</profile>
 	</profiles>
-
-	<properties>
-		<spring.core.version>3.2.8.RELEASE</spring.core.version>
-		<spring.version>3.1.6.RELEASE</spring.version>
-		<spring.security.version>3.2.3.RELEASE</spring.security.version>
-		<log4j.version>1.2.16</log4j.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
@@ -81,16 +100,16 @@
 			<version>${spring.core.version}</version>
 		</dependency>
 		<!-- Spring Security -->
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-web</artifactId>
-				<version>${spring.security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-config</artifactId>
-				<version>${spring.security.version}</version>
-			</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
 		<!-- Tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -126,13 +145,8 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.9</version>
 		</dependency>
-		<!-- 
-		<dependency>
-    		<groupId>org.codehaus.jackson</groupId>
-    		<artifactId>jackson-mapper-lgpl</artifactId>
-    		<version>1.8.1</version>
-		</dependency>
-		-->
+		<!-- <dependency> <groupId>org.codehaus.jackson</groupId> <artifactId>jackson-mapper-lgpl</artifactId> 
+			<version>1.8.1</version> </dependency> -->
 		<!-- DOZER -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
@@ -151,6 +165,11 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
 		<!-- PROVIDED -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -159,10 +178,17 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- TEST -->
+		<!-- TEST -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.test.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
